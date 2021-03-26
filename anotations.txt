@@ -1,0 +1,7 @@
+## Arquitetura Atomic
+https://storybook.js.org/tutorials/intro-to-storybook/react-native/en/get-started/
+
+## Criar componentes com divições de pastas
+Atoms: apenas uma granularidade do componente. Quando falamos de árvores onde temos nós e folhas, os átomos seriam as folhas. O HTML é uma árvore e essas folhas são: Inputs, Labels, Buttons, entre outros.
+Molecules: o conjunto de átomos são as moléculas, mas como podemos representá-las na prática? Um pequeno formulário de pesquisa onde temos o <form> e seus filhos compostos de input, labels, e buttons.
+Organisms: se trata do conjunto das moléculas mas também pode conter átomos. Um header padrão das páginas web é composto de menus, formulários de pesquisa, logomarca. Perceba que tudo isso são moléculas fazendo um organismo.
