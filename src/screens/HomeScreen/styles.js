@@ -1,5 +1,7 @@
 import styled from "styled-components/native";
 
+export const ScreenScroll = styled.ScrollView``;
+
 export const ScreenContainer = styled.View`
   display: flex;
   flex-direction: column;
@@ -8,6 +10,14 @@ export const ScreenContainer = styled.View`
   background-color: ${({ theme }) => theme.colors.BackgroundDark};
   width: 100%;
   height: 100%;
+`;
+
+export const ContentContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: ${({ theme }) => theme.metrics.wp(100)}px;
   padding: ${({ theme }) => theme.metrics.px(24)}px;
 `;
 
@@ -17,10 +27,10 @@ export const TopContainer = styled.View`
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
-  margin-top: ${({ theme }) => theme.metrics.px(10)}px;
-  margin-bottom: ${({ theme }) => theme.metrics.px(36)}px;
+  margin-top: ${({ theme }) => theme.metrics.px(30)}px;
+  margin-bottom: ${({ theme }) => theme.metrics.px(24)}px;
 `;
 
 export const TitleContainer = styled.View`
-  width: 60%;
+  width: 70%;
 `;
