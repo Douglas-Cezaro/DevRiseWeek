@@ -16,7 +16,14 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <Loading />;
+    style = {
+      flex: 1,
+      width: "100%",
+      backgroundColor: "#1E1D42",
+      justifyContent: "center",
+      alignItems: "center",
+    };
+    return <Loading width={200} height={200} style={style} />;
   }
 
   return (

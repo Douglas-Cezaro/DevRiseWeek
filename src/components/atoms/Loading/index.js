@@ -3,20 +3,13 @@ import { View, Text } from "react-native";
 import Loading from "../../../../assets/animations/loading.json";
 import LottieView from "lottie-react-native";
 
-export default () => {
+export default ({ width, height, style }) => {
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#1E1D42",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <View style={style}>
       <LottieView
         style={{
-          width: 200,
-          height: 200,
+          width: width,
+          height: height,
         }}
         resizeMode="contain"
         autoPlay

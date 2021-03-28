@@ -2,10 +2,18 @@ import React from "react";
 import { HouseListContainer } from "./styles";
 import { HouseCard } from "../../molecules";
 
-export const HousesList = ({ data, children }) => {
+export const HousesList = ({
+  data,
+  children,
+  ListFooterComponent,
+  onEndReached,
+}) => {
   return (
     <HouseListContainer
       data={data}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.1}
+      ListFooterComponent={ListFooterComponent}
       renderItem={({ item }) => (
         <HouseCard
           title={item.address.line}
