@@ -12,7 +12,7 @@ import Loading from "../../components/atoms/Loading";
 export const HomeScreen = () => {
   const [housesListData, setHousesListData] = useState([]);
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const callGetHouses = async () => {
     setLoading(true);

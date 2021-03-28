@@ -1,6 +1,6 @@
 import React from "react";
-import "intl";
-import "intl/locale-data/jsonp/en";
+import { useNavigation } from "@react-navigation/native";
+
 import {
   CardContainer,
   CardImage,
@@ -9,15 +9,25 @@ import {
   TextContainerRight,
 } from "./styles";
 import { CardTitle, CardHighLitghtText, CardDescription } from "../../atoms";
+import { FormattedPrice } from "../../../utils";
+export const HouseCard = ({ imgSource, title, description, price, item }) => {
+  const navigator = useNavigation();
 
-export const HouseCard = ({ imgSource, title, description, price }) => {
-  const formattedPrice = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
+  const onClickItemContainer = () => {
+    navigator.navigate("Details", {
+      selectedHouse: {
+        property_id: item.property_id,
+        photos: [
+          {
+            href: item.photos[1].href,
+          },
+        ],
+      },
+    });
+  };
 
   return (
-    <CardContainer>
+    <CardContainer onPress={() => onClickItemContainer()}>
       <CardImage source={{ uri: imgSource }} />
       <TextContainer>
         <TextContainerLeft>
@@ -25,9 +35,7 @@ export const HouseCard = ({ imgSource, title, description, price }) => {
           <CardDescription>{description}</CardDescription>
         </TextContainerLeft>
         <TextContainerRight>
-          <CardHighLitghtText>
-            {formattedPrice.format(price)}
-          </CardHighLitghtText>
+          <CardHighLitghtText>{FormattedPrice(price)}</CardHighLitghtText>
         </TextContainerRight>
       </TextContainer>
     </CardContainer>

@@ -1,11 +1,11 @@
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components";
-import { HomeScreen } from "./src/screens";
 import { theme } from "./src/styles/theme";
-import Storybook from "./storybook";
 import { useFonts } from "expo-font";
 import Loading from "./src/components/atoms/Loading";
+import { Navigator } from "./src/routes";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -27,10 +27,11 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <StatusBar hidden />
-      {/* <Storybook /> */}
-      <HomeScreen />
-    </ThemeProvider>
+    <NavigationContainer>
+      <ThemeProvider theme={theme}>
+        <StatusBar hidden />
+        <Navigator />
+      </ThemeProvider>
+    </NavigationContainer>
   );
 }

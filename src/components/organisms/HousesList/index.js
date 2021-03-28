@@ -16,6 +16,7 @@ export const HousesList = ({
       ListFooterComponent={ListFooterComponent}
       renderItem={({ item }) => (
         <HouseCard
+          item={item}
           title={item.address.line}
           description={`${
             item.address.neighborhood_name
@@ -23,7 +24,11 @@ export const HousesList = ({
               : item.address.city
           } - ${item.address.state}`}
           imgSource={item.photos[0].href}
-          price={item.community.price_max}
+          price={
+            item.community.price_max
+              ? item.community.price_max
+              : item.community.price_min
+          }
         />
       )}
       keyExtractor={(item) => item.property_id}
