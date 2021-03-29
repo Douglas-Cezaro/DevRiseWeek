@@ -25,9 +25,11 @@ export const HousesList = ({
           } - ${item.address.state}`}
           imgSource={item.photos[0].href}
           price={
-            item.community.price_max
+            item.community
               ? item.community.price_max
-              : item.community.price_min
+                ? item.community.price_max
+                : item.community.price_min
+              : 0
           }
         />
       )}

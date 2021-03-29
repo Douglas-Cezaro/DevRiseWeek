@@ -29,7 +29,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <StatusBar hidden />
+        <StatusBar hidden translucent />
         <Navigator />
       </ThemeProvider>
     </NavigationContainer>

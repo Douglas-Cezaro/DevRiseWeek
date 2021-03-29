@@ -18,5 +18,5 @@ const Wrapper = styled.View`
 stories.addDecorator((getStory) => <Wrapper>{getStory()}</Wrapper>);
 stories.add("Standard", () => {
   const value = text("TextButton", "Aplicar");
-  return <Button text={value} />;
+  return <Button>value</Button>;
 });

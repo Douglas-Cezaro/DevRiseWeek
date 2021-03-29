@@ -10,7 +10,7 @@ export const ScreenContainer = styled.SafeAreaView`
   background-color: ${({ theme }) => theme.colors.BackgroundDark};
   width: 100%;
   height: 100%;
-  padding-top: ${({ theme }) => theme.metrics.px(20)}px;
+  padding-top: ${({ theme }) => theme.metrics.px(24)}px;
 `;
 
 export const ContentContainer = styled.View`
@@ -28,6 +28,7 @@ export const TopContainer = styled.View`
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
+  /* margin-top: ${({ theme }) => theme.metrics.px(30)}px; */
   margin-bottom: ${({ theme }) => theme.metrics.px(24)}px;
 `;
 

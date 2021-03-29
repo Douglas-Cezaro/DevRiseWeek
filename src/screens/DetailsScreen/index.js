@@ -16,10 +16,16 @@ import {
 import { FormattedPrice } from "../../utils";
 import { getHouseDetails } from "../../services/call";
 import Loading from "../../components/atoms/Loading";
+import {
+  getIfHouseIsFavorite,
+  removeHouseAsFavorite,
+  saveHouseIsFavorite,
+} from "../../services/db";
 
 export const DetailsScreen = ({ route, navigation }) => {
   const { selectedHouse } = route.params;
 
+  const [favorite, setFavorite] = useState(false);
   const [selectedStar, setSelectedStar] = useState(false);
   const [loading, setLoading] = useState(true);
   const [houseDetails, setHouseDetails] = useState();
@@ -36,12 +42,23 @@ export const DetailsScreen = ({ route, navigation }) => {
     navigation.goBack();
   };
 
-  const onClickSelectedStar = () => {
-    setSelectedStar(!selectedStar);
+  const checkIfHouseIsFavorite = async () => {
+    const isFavorite = await getIfHouseIsFavorite(selectedHouse.property_id);
+    setFavorite(isFavorite);
+  };
+  const saveFavoriteHouse = async () => {
+    if (favorite) {
+      await removeHouseAsFavorite(selectedHouse.property_id);
+      setFavorite(false);
+    } else {
+      await saveHouseIsFavorite(selectedHouse.property_id);
+      setFavorite(true);
+    }
   };
 
   useEffect(() => {
     callGetHouseDetails();
+    checkIfHouseIsFavorite();
   }, []);
   return (
     <ScreenContainer>
@@ -52,9 +69,10 @@ export const DetailsScreen = ({ route, navigation }) => {
           onPress={onClickArrowBack}
         />
         <IconButton
-          iconName={selectedStar ? "star" : "star-outline"}
+          iconName={favorite ? "star" : "star-outline"}
           transparent
-          onPress={onClickSelectedStar}
+          onPress={saveFavoriteHouse}
+          fill={favorite}
         />
       </ImageBackground>
       {loading ? (
@@ -88,7 +106,11 @@ export const DetailsScreen = ({ route, navigation }) => {
           <FeatureContainer>
             <HouseFeatureCard
               iconName="arrow-collapse-all"
-              featureText={`${houseDetails.lot_size.size} ${houseDetails.lot_size.units}`}
+              featureText={`${
+                houseDetails.community.sqft_max
+                  ? houseDetails.community.sqft_max
+                  : houseDetails.community.sqft_min
+              } ${houseDetails.lot_size.units}`}
               iconLib="materialcommunity"
             />
             <HouseFeatureCard

@@ -2,11 +2,16 @@ import React from "react";
 import { InputContainer, InputText } from "./styles";
 import { InputLabel } from "../../atoms";
 
-export const Input = ({ label, placeholder }) => {
+export const Input = (props) => {
+  const { label, placeholder } = props;
   return (
     <InputContainer>
       <InputLabel>{label}</InputLabel>
-      <InputText placeholder={placeholder} placeholderTextColor="white" />
+      <InputText
+        {...props}
+        placeholder={placeholder}
+        placeholderTextColor="white"
+      />
     </InputContainer>
   );
 };

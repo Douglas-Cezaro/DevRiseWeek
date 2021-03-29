@@ -5,46 +5,60 @@ import {
   TitleContainer,
   ContentContainer,
 } from "./styles";
-import { Title, IconButton, Input, HousesList } from "../../components";
+import {
+  Title,
+  IconButton,
+  Input,
+  HousesList,
+  FilterModal,
+} from "../../components";
 import { getHousesCall } from "../../services/call";
+import { useHousesHooks } from "../../services/hooks";
 import Loading from "../../components/atoms/Loading";
+import { useHousesStore } from "../../services/stores";
 
 export const HomeScreen = () => {
-  const [housesListData, setHousesListData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
-
-  const callGetHouses = async () => {
-    setLoading(true);
-    const result = await getHousesCall(page);
-
-    setHousesListData([
-      ...housesListData,
-      ...(result.properties ? result.properties : []),
-    ]);
-    setPage(page + 10);
-    setLoading(false);
-  };
+  const { onGetHouses } = useHousesHooks();
+  const [filterModalVisible, setFilterModalVisible] = useState(false);
+  const {
+    housesList,
+    loadingHousesList,
+    offset,
+    setOffset,
+    finish,
+  } = useHousesStore();
 
   renderFooter = () => {
-    if (!loading) return null;
+    if (!loadingHousesList) return null;
     style = {
       alignSelf: "center",
       marginVertical: 20,
     };
+    if (finish) {
+      return (
+        <TitleContainer>
+          <Title>Fim da lista</Title>
+        </TitleContainer>
+      );
+    }
     return <Loading width={100} height={100} style={style} />;
   };
 
+  const toogleFilterModal = () => {
+    setOffset(0);
+    setFilterModalVisible(!filterModalVisible);
+  };
+
   useEffect(() => {
-    callGetHouses();
+    onGetHouses();
   }, []);
 
   return (
     <ScreenContainer>
       <HousesList
-        data={housesListData}
+        data={housesList}
         ListFooterComponent={renderFooter}
-        onEndReached={callGetHouses}
+        onEndReached={onGetHouses}
       >
         <ContentContainer>
           <TopContainer>
@@ -52,11 +66,14 @@ export const HomeScreen = () => {
               <Title>Encontre aqui seu imóvel</Title>
             </TitleContainer>
 
-            <IconButton iconName="filter" />
+            <IconButton iconName="filter" onPress={toogleFilterModal} />
           </TopContainer>
           <Input label="Localização" placeholder="Digite o endereço" />
         </ContentContainer>
       </HousesList>
+      {filterModalVisible && (
+        <FilterModal onClose={toogleFilterModal} visible={filterModalVisible} />
+      )}
     </ScreenContainer>
   );
 };
