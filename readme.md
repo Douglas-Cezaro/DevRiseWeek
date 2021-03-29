@@ -22,13 +22,16 @@
     <a href="https://github.com/Douglas-Cezaro/DevRiseWeek/search?l=javascript">
 	     <img src="https://img.shields.io/badge/made%20with-javascript-yellow">
 	</a>
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
+</a>
+	<a href="./LICENSE">
+	     <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
+	</a>
+  
 </p>
 
 <p align="center">
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
 </p>
 <br>
 
